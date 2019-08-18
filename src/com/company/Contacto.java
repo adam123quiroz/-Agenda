@@ -1,7 +1,5 @@
 package com.company;
 
-import org.jetbrains.annotations.Contract;
-
 public class Contacto {
     private String name;
     private String apellido;
@@ -9,8 +7,7 @@ public class Contacto {
     private String adress;
     private int number;
 
-    @Contract(pure = true)
-    public Contacto(String name, String apellido, String email, String adress, int number) {
+    Contacto(String name, String apellido, String email, String adress, int number) {
         this.name = name;
         this.apellido = apellido;
         this.email = email;
