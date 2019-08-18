@@ -56,7 +56,6 @@ public class FrameContacto extends JFrame{
 
         listaContactos.add(new Contacto("Adam", "Quiroz", "admi@gmai.com", "La Paz", 72095544));
         listaContactos.add(new Contacto("Diego", "La Faye", "admi@gmai.com", "Santa Cruz", 68468467));
-        listaContactos.add(new Contacto("Mariana", "Costa de La Faye", "admi@gmai.com", "Sucre", 64654564));
 
         actualizarContacto();
 
