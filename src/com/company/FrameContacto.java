@@ -3,6 +3,8 @@ package com.company;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,19 +24,18 @@ public class FrameContacto extends JFrame{
     private DefaultTableModel modelo;
 
     private int rowSelected;
+    private ActualizarTabla actualizarTabla;
 
     FrameContacto() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
         setContentPane(contentPane);
 
+        modelo = new ModelTable(new String[]{"Nombre", "Apellido",
+                "Dirección", "Correo", "Número de Celular"});
+
         listaContactos = new LinkedList<>();
-        String[] nameColums = new String [] {
-                "Nombre", "Apellido",
-                "Dirección", "Correo", "Número de Celular"};
-        modelo = new ModelTable(nameColums);
         tableContactos.setModel(modelo);
-        actualizarContacto();
 
         aniadirButton.addActionListener(actionEvent -> {
             Contacto aux = new Contacto(
@@ -47,15 +48,17 @@ public class FrameContacto extends JFrame{
             actualizarContacto(aux);
             resetearSeldas();
         });
+
         resetearButton.addActionListener(actionEvent -> resetearSeldas());
+
         eliminarButton.addActionListener(actionEvent -> {
             listaContactos.remove(rowSelected);
             modelo.removeRow(rowSelected);
             tableContactos.setModel(modelo);
         });
-        tableContactos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableContactos.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 int row = tableContactos.rowAtPoint(e.getPoint());
                 int column = tableContactos.columnAtPoint(e.getPoint());
                 if (row >= 0 && column >= 0) {
@@ -65,33 +68,15 @@ public class FrameContacto extends JFrame{
         });
     }//end constructor class
 
-    private void actualizarContacto() {
-        for (int i = 0; i < listaContactos.size(); i++) {
-            modelo.addRow((Object[]) null);
-            Contacto getP = listaContactos.get(i);
-            modelo.setValueAt(getP.getName(), i, 0);
-            modelo.setValueAt(getP.getApellido(), i, 1);
-            modelo.setValueAt(getP.getAdress(), i, 2);
-            modelo.setValueAt(getP.getEmail(), i, 3);
-            modelo.setValueAt(getP.getNumber(), i, 4);
-        }
-        tableContactos.setModel(modelo);
-    }
-
     private void actualizarContacto(Contacto contacto) {
-        System.out.println("numero de la lista "+listaContactos.size());
         listaContactos.add(contacto);
         int i = listaContactos.size() - 1;
-        modelo.addRow((Object[]) null);
         Contacto getP = listaContactos.get(i);
-        modelo.setValueAt(getP.getName(), i, 0);
-        modelo.setValueAt(getP.getApellido(), i, 1);
-        modelo.setValueAt(getP.getAdress(), i, 2);
-        modelo.setValueAt(getP.getEmail(), i, 3);
-        modelo.setValueAt(getP.getNumber(), i, 4);
-        tableContactos.setModel(modelo);
+        actualizarTabla = new ActualizarTabla(modelo, getP, i);
+        tableContactos.setModel(actualizarTabla.update());
     }
-    private void resetearSeldas(){
+
+    private void resetearSeldas() {
         textFieldAdress.setText(null);
         textFieldApellido.setText(null);
         textFieldEmail.setText(null);
