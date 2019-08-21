@@ -28,35 +28,12 @@ public class FrameContacto extends JFrame{
         setSize(1000, 700);
         setContentPane(contentPane);
 
-        modelo = (new DefaultTableModel(
-                null, new String [] {
-                "Nombre", "Apellido",
-                "Dirección", "Correo", "Número de Celular"}){
-            Class[] types = new Class [] {
-                    java.lang.String.class,
-                    java.lang.String.class,
-                    java.lang.String.class,
-                    java.lang.String.class,
-                    java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                    true, true, true, true, true
-            };
-            @Override
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return canEdit [colIndex];
-            }
-        });
         listaContactos = new LinkedList<>();
+        String[] nameColums = new String [] {
+                "Nombre", "Apellido",
+                "Dirección", "Correo", "Número de Celular"};
+        modelo = new ModelTable(nameColums);
         tableContactos.setModel(modelo);
-
-        listaContactos.add(new Contacto("Adam", "Quiroz", "admi@gmai.com", "La Paz", 72095544));
-        listaContactos.add(new Contacto("Diego", "La Faye", "admi@gmai.com", "Santa Cruz", 68468467));
-
         actualizarContacto();
 
         aniadirButton.addActionListener(actionEvent -> {
