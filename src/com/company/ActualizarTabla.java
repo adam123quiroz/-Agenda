@@ -1,25 +1,29 @@
 package com.company;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class ActualizarTabla {
     private DefaultTableModel modelo;
-    private Contacto contacto;
-    private int i;
+    private List<Contacto> listContacto;
 
-    ActualizarTabla(DefaultTableModel modelo, Contacto contacto, int i) {
-        this.modelo = modelo;
-        this.contacto = contacto;
-        this.i = i;
+    ActualizarTabla(List listContacto) {
+        this.listContacto = listContacto;
     }
 
     public DefaultTableModel update(){
-        modelo.addRow((Object[]) null);
-        modelo.setValueAt(contacto.getName(), i, 0);
-        modelo.setValueAt(contacto.getApellido(), i, 1);
-        modelo.setValueAt(contacto.getAdress(), i, 2);
-        modelo.setValueAt(contacto.getEmail(), i, 3);
-        modelo.setValueAt(contacto.getNumber(), i, 4);
+        modelo = new ModelTable(new String[]{"CI", "Nombre", "Apellido",
+                "Dirección", "Correo", "Número de Celular"});
+        for (int i = 0; i < listContacto.size() ; i++) {
+            modelo.addRow((Object[]) null);
+            modelo.setValueAt(listContacto.get(i).getId(), i, 0);
+            modelo.setValueAt(listContacto.get(i).getName(), i, 1);
+            modelo.setValueAt(listContacto.get(i).getApellido(), i, 2);
+            modelo.setValueAt(listContacto.get(i).getAdress(), i, 3);
+            modelo.setValueAt(listContacto.get(i).getEmail(), i, 4);
+            modelo.setValueAt(listContacto.get(i).getNumber(), i, 5);
+        }
+
         return modelo;
     }
 }

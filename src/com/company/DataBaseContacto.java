@@ -11,23 +11,21 @@ public class DataBaseContacto extends Database {
 
     private PreparedStatement selectContacto = null;
     private PreparedStatement insertContacto = null;
-    private PreparedStatement selectMaquinaPorCodigo = null;
+    private PreparedStatement deleteMaquina = null;
 
     public DataBaseContacto() {
 
         try {
 
             insertContacto = getConnection().prepareStatement(
-                    "INSERT INTO `contacto`(`id`, `nombre`, "
-                            + "`apellido`, `email`, `adress`, `numero`) VALUES "
-                            + "(? ,? ,? ,? ,? ,? )" );
+                    "INSERT INTO `contacto`(`id`, `nombre`, `apellido`, `email`, `adress`, `numero`) VALUES (? ,? ,? ,? ,? ,? )");
 
             selectContacto = getConnection().prepareStatement(
                     "SELECT * FROM `contacto`");
 
-//			deleteMaquina = getConnection().prepareStatement(
-//					"DELETE FROM `maquina`"
-//					+ "WHERE `maquina`.`COD_MAQUINA` = ?" );
+			deleteMaquina = getConnection().prepareStatement(
+					"DELETE FROM `maquina`"
+					+ "WHERE `maquina`.`COD_MAQUINA` = ?" );
 
 //            selectMaquinaPorCodigo = getConnection().prepareStatement(
 //                    "SELECT * FROM `maquina` "
@@ -76,43 +74,21 @@ public class DataBaseContacto extends Database {
         return listContactos;
     }
 
-    public Contacto getMaquinaPorCodigo(String cod) {
+    public void deleteContacto(String cod) {
 
-        Contacto contacto = null;
+        int actualizacion = 0;
         ResultSet resultSet = null;
         try {
 
-            selectMaquinaPorCodigo.setString(1, cod);
-            resultSet = selectMaquinaPorCodigo.executeQuery();//ejecuta los queries
-            contacto = new Contacto();
-
-            while(resultSet.next()) {
-                contacto.setId(resultSet.getString("id"));
-                contacto.setName(resultSet.getString("nombre"));
-                contacto.setApellido(resultSet.getString("apellido"));
-                contacto.setEmail(resultSet.getString("email"));
-                contacto.setAdress(resultSet.getString("adress"));
-                contacto.setNumber(resultSet.getInt("numero"));
-
-            }//fin del while
+            deleteMaquina.setString(1, cod);
+            actualizacion = deleteMaquina.executeUpdate();//ejecuta los queries
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }//end try catch
-
-        finally {
-            try	{
-                Objects.requireNonNull(resultSet).close();
-            }catch ( SQLException sqlException ) {
-                sqlException.printStackTrace();
-                close();
-            }	// end try catch
-        } // end finally
-
-        return contacto;
     }//fin del metodo
 
-    public void setMaquina(Contacto contacto) {
+    public void setContanto(Contacto contacto) {
 
         int actualizacion = 0;
         try {
@@ -129,7 +105,7 @@ public class DataBaseContacto extends Database {
         } catch ( SQLException sqlException ) {
             sqlException.printStackTrace();
             close();
-        }//fin del ry catch
+        }//fin del try catch
 
     }
 

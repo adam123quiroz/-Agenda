@@ -28,16 +28,25 @@ public class FrameContacto extends JFrame{
     private int rowSelected;
     private ActualizarTabla actualizarTabla;
 
+    private DataBaseContacto dataBaseContacto;
+
     FrameContacto() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
         setContentPane(contentPane);
 
-        modelo = new ModelTable(new String[]{"CI", "Nombre", "Apellido",
-                "Dirección", "Correo", "Número de Celular"});
+
 
         listaContactos = new LinkedList<>();
+
+        dataBaseContacto = new DataBaseContacto();
+
+        listaContactos = dataBaseContacto.getAllContactos();
+        actualizarTabla = new ActualizarTabla(listaContactos);
+        modelo = actualizarTabla.update();
         tableContactos.setModel(modelo);
+
+
 
         aniadirButton.addActionListener(actionEvent -> {
             Contacto aux = new Contacto(
@@ -48,7 +57,8 @@ public class FrameContacto extends JFrame{
                     textFieldAdress.getText(),
                     Integer.parseInt(textFieldNumber.getText())
             );
-            actualizarContacto(aux);
+            dataBaseContacto.setContanto(aux);
+            actualizarContacto();
             resetearSeldas();
         });
 
@@ -71,11 +81,8 @@ public class FrameContacto extends JFrame{
         });
     }//end constructor class
 
-    private void actualizarContacto(Contacto contacto) {
-        listaContactos.add(contacto);
-        int i = listaContactos.size() - 1;
-        Contacto getP = listaContactos.get(i);
-        actualizarTabla = new ActualizarTabla(modelo, getP, i);
+    private void actualizarContacto() {
+        listaContactos = dataBaseContacto.getAllContactos();
         tableContactos.setModel(actualizarTabla.update());
     }
 
