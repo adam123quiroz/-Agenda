@@ -17,8 +17,8 @@ public class DataBaseContacto extends Database {
 
         try {
 
-            insertContacto = getConnection().prepareStatement(
-                    "INSERT INTO `contacto`(`id`, `nombre`, `apellido`, `email`, `adress`, `numero`) VALUES (? ,? ,? ,? ,? ,? )");
+//            insertContacto = getConnection().prepareStatement(
+//                    "INSERT INTO `contacto`(`id`, `nombre`, `apellido`, `email`, `adress`, `numero`) VALUES (? ,? ,? ,? ,? ,? )");
 
             selectContacto = getConnection().prepareStatement(
                     "SELECT * FROM `contacto`");
