@@ -83,6 +83,8 @@ public class FrameContacto extends JFrame{
 
     private void actualizarContacto() {
         listaContactos = dataBaseContacto.getAllContactos();
+        System.out.println(listaContactos.toString());
+        actualizarTabla.setListContacto(listaContactos);
         tableContactos.setModel(actualizarTabla.update());
     }
 

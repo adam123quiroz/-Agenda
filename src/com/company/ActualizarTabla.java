@@ -26,4 +26,13 @@ public class ActualizarTabla {
 
         return modelo;
     }
+
+	public List<Contacto> getListContacto() {
+		return listContacto;
+	}
+
+	public void setListContacto(List<Contacto> listContacto) {
+		this.listContacto = listContacto;
+	}
+    
 }
