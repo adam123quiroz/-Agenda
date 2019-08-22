@@ -20,6 +20,8 @@ public class FrameContacto extends JFrame{
     private JButton eliminarButton;
     private JTable tableContactos;
 
+
+
     private List<Contacto> listaContactos;
     private DefaultTableModel modelo;
 
