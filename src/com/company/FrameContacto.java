@@ -19,7 +19,7 @@ public class FrameContacto extends JFrame{
     private JButton resetearButton;
     private JButton eliminarButton;
     private JTable tableContactos;
-
+    private JTextField textFieldCi;
 
 
     private List<Contacto> listaContactos;
@@ -33,7 +33,7 @@ public class FrameContacto extends JFrame{
         setSize(1000, 700);
         setContentPane(contentPane);
 
-        modelo = new ModelTable(new String[]{"Nombre", "Apellido",
+        modelo = new ModelTable(new String[]{"CI", "Nombre", "Apellido",
                 "Dirección", "Correo", "Número de Celular"});
 
         listaContactos = new LinkedList<>();
@@ -41,6 +41,7 @@ public class FrameContacto extends JFrame{
 
         aniadirButton.addActionListener(actionEvent -> {
             Contacto aux = new Contacto(
+                    textFieldCi.getText(),
                     textFieldName.getText(),
                     textFieldApellido.getText(),
                     textFieldEmail.getText(),
@@ -79,6 +80,7 @@ public class FrameContacto extends JFrame{
     }
 
     private void resetearSeldas() {
+        textFieldCi.setText(null);
         textFieldAdress.setText(null);
         textFieldApellido.setText(null);
         textFieldEmail.setText(null);
