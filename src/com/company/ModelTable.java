@@ -8,10 +8,11 @@ public class ModelTable extends DefaultTableModel {
             java.lang.String.class,
             java.lang.String.class,
             java.lang.String.class,
+            java.lang.String.class,
             java.lang.String.class
     };
     boolean[] canEdit = new boolean [] {
-            true, true, true, true, true
+            true, true, true, true, true, true
     };
     ModelTable(String[] nameColumns){
         super(null, nameColumns);
