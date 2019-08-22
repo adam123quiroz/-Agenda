@@ -24,8 +24,8 @@ public class DataBaseContacto extends Database {
                     "SELECT * FROM `contacto`");
 
 			deleteMaquina = getConnection().prepareStatement(
-					"DELETE FROM `maquina`"
-					+ "WHERE `maquina`.`COD_MAQUINA` = ?" );
+					"DELETE FROM `contacto`"
+					+ "WHERE `contacto`.`id` = ?" );
 
 //            selectMaquinaPorCodigo = getConnection().prepareStatement(
 //                    "SELECT * FROM `maquina` "

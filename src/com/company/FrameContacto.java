@@ -59,6 +59,7 @@ public class FrameContacto extends JFrame{
             );
             dataBaseContacto.setContanto(aux);
             actualizarContacto();
+            System.out.println("Estoy aqui");
             resetearSeldas();
         });
 
@@ -83,7 +84,7 @@ public class FrameContacto extends JFrame{
 
     private void actualizarContacto() {
         listaContactos = dataBaseContacto.getAllContactos();
-        System.out.println(listaContactos.toString());
+        System.out.println("asdsadlsadhaskjdshds"+listaContactos.toString());
         actualizarTabla.setListContacto(listaContactos);
         tableContactos.setModel(actualizarTabla.update());
     }

@@ -12,7 +12,6 @@ class Database {
     private Connection connection = null; // se maneja la conexion
 
     Database() {
-
         try {
 
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);

@@ -9,11 +9,12 @@ public class ActualizarTabla {
 
     ActualizarTabla(List listContacto) {
         this.listContacto = listContacto;
+        modelo = new ModelTable(new String[]{"CI", "Nombre", "Apellido",
+                "Dirección", "Correo", "Número de Celular"});
     }
 
     public DefaultTableModel update(){
-        modelo = new ModelTable(new String[]{"CI", "Nombre", "Apellido",
-                "Dirección", "Correo", "Número de Celular"});
+        
         for (int i = 0; i < listContacto.size() ; i++) {
             modelo.addRow((Object[]) null);
             modelo.setValueAt(listContacto.get(i).getId(), i, 0);
