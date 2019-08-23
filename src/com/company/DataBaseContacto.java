@@ -11,7 +11,8 @@ public class DataBaseContacto extends Database {
 
     private PreparedStatement selectContacto = null;
     private PreparedStatement insertContacto = null;
-    private PreparedStatement deleteMaquina = null;
+    private PreparedStatement deleteContacto= null;
+    private PreparedStatement selectContactoPorCodigo = null;
 
     public DataBaseContacto() {
 
@@ -23,13 +24,13 @@ public class DataBaseContacto extends Database {
             selectContacto = getConnection().prepareStatement(
                     "SELECT * FROM `contacto`");
 
-			deleteMaquina = getConnection().prepareStatement(
+            deleteContacto = getConnection().prepareStatement(
 					"DELETE FROM `contacto`"
 					+ "WHERE `contacto`.`id` = ?" );
 
-//            selectMaquinaPorCodigo = getConnection().prepareStatement(
-//                    "SELECT * FROM `maquina` "
-//                            + "WHERE `COD_MAQUINA` = ?");
+            selectContactoPorCodigo = getConnection().prepareStatement(
+                    "SELECT * FROM `maquina` "
+                            + "WHERE `COD_MAQUINA` = ?");
 
 
         } catch (SQLException sqlException) {
@@ -80,8 +81,8 @@ public class DataBaseContacto extends Database {
         ResultSet resultSet = null;
         try {
 
-            deleteMaquina.setString(1, cod);
-            actualizacion = deleteMaquina.executeUpdate();//ejecuta los queries
+            deleteContacto.setString(1, cod);
+            actualizacion = deleteContacto.executeUpdate();//ejecuta los queries
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
