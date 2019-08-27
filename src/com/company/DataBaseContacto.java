@@ -17,21 +17,19 @@ public class DataBaseContacto extends Database {
     public DataBaseContacto() {
 
         try {
-
             insertContacto = getConnection().prepareStatement(
-                    "INSERT INTO `contacto`(`id`, `nombre`, `apellido`, `email`, `addres`, `numero`) VALUES (? ,? ,? ,? ,? ,? )");
+                    "INSERT INTO contacto (id, nombre, apellido, email, addres, numero) VALUES (? ,? ,? ,? ,? ,? )");
 
             selectContacto = getConnection().prepareStatement(
-                    "SELECT * FROM `contacto`");
+                    "SELECT * FROM contacto");
 
             deleteContacto = getConnection().prepareStatement(
-					"DELETE FROM `contacto`"
-					+ "WHERE `contacto`.`id` = ?" );
+					"DELETE FROM contacto"
+					+ "WHERE contacto.id = ?" );
 
             selectContactoPorCodigo = getConnection().prepareStatement(
                     "SELECT * FROM `maquina` "
                             + "WHERE `COD_MAQUINA` = ?");
-
 
         } catch (SQLException sqlException) {
 
@@ -40,9 +38,9 @@ public class DataBaseContacto extends Database {
         }
     }//fin del constructor
 
-    public List<Contacto> getAllContactos() {
+    public List<Contact> getAllContactos() {
 
-        List <Contacto>  listContactos = null;
+        List <Contact>  listContactos = null;
         ResultSet resultSet = null;
         try {
 
@@ -50,7 +48,7 @@ public class DataBaseContacto extends Database {
             listContactos = new ArrayList<>();
 
             while(resultSet.next()) {
-                listContactos.add( new Contacto(
+                listContactos.add( new Contact(
                         resultSet.getString("id"),
                         resultSet.getString("nombre"),
                         resultSet.getString("apellido"),
@@ -89,16 +87,16 @@ public class DataBaseContacto extends Database {
         }//end try catch
     }//fin del metodo
 
-    public void setContanto(Contacto contacto) {
+    public void setContanto(Contact contacto) {
 
         int actualizacion = 0;
         try {
 
             insertContacto.setString(1, contacto.getId());
             insertContacto.setString(2, contacto.getName());
-            insertContacto.setString(3, contacto.getApellido());
+            insertContacto.setString(3, contacto.getSurname());
             insertContacto.setString(4, contacto.getEmail());
-            insertContacto.setString(5, contacto.getAdress());
+            insertContacto.setString(5, contacto.getAddress());
             insertContacto.setInt(6, contacto.getNumber());
 
             actualizacion = insertContacto.executeUpdate();

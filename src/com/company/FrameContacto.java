@@ -11,18 +11,18 @@ import java.util.List;
 public class FrameContacto extends JFrame{
     private JPanel contentPane;
     private JTextField textFieldName;
-    private JTextField textFieldApellido;
+    private JTextField textFieldSurname;
     private JTextField textFieldEmail;
-    private JTextField textFieldAdress;
+    private JTextField textFieldAddress;
     private JTextField textFieldNumber;
     private JButton aniadirButton;
     private JButton resetearButton;
     private JButton eliminarButton;
-    private JTable tableContactos;
+    private JTable tableContacts;
     private JTextField textFieldCi;
 
 
-    private List<Contacto> listaContactos;
+    private List<Contact> listaContactos;
     private DefaultTableModel modelo;
 
     private int rowSelected;
@@ -35,31 +35,25 @@ public class FrameContacto extends JFrame{
         setSize(1000, 700);
         setContentPane(contentPane);
 
-
-
         listaContactos = new LinkedList<>();
-
         dataBaseContacto = new DataBaseContacto();
 
         listaContactos = dataBaseContacto.getAllContactos();
         actualizarTabla = new ActualizarTabla(listaContactos);
         modelo = actualizarTabla.update();
-        tableContactos.setModel(modelo);
-
-
+        tableContacts.setModel(modelo);
 
         aniadirButton.addActionListener(actionEvent -> {
-            Contacto aux = new Contacto(
+            Contact aux = new Contact(
                     textFieldCi.getText(),
                     textFieldName.getText(),
-                    textFieldApellido.getText(),
+                    textFieldSurname.getText(),
                     textFieldEmail.getText(),
-                    textFieldAdress.getText(),
+                    textFieldAddress.getText(),
                     Integer.parseInt(textFieldNumber.getText())
             );
             dataBaseContacto.setContanto(aux);
             actualizarContacto();
-            System.out.println("Estoy aqui");
             resetearSeldas();
         });
 
@@ -68,13 +62,13 @@ public class FrameContacto extends JFrame{
         eliminarButton.addActionListener(actionEvent -> {
             listaContactos.remove(rowSelected);
             modelo.removeRow(rowSelected);
-            tableContactos.setModel(modelo);
+            tableContacts.setModel(modelo);
         });
-        tableContactos.addMouseListener(new MouseAdapter() {
+        tableContacts.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = tableContactos.rowAtPoint(e.getPoint());
-                int column = tableContactos.columnAtPoint(e.getPoint());
+                int row = tableContacts.rowAtPoint(e.getPoint());
+                int column = tableContacts.columnAtPoint(e.getPoint());
                 if (row >= 0 && column >= 0) {
                     rowSelected = row;
                 }
@@ -84,15 +78,15 @@ public class FrameContacto extends JFrame{
 
     private void actualizarContacto() {
         listaContactos = dataBaseContacto.getAllContactos();
-        System.out.println("asdsadlsadhaskjdshds"+listaContactos.toString());
-        actualizarTabla.setListContacto(listaContactos);
-        tableContactos.setModel(actualizarTabla.update());
+        System.out.println(listaContactos.toString());
+        actualizarTabla.setListContacts(listaContactos);
+        tableContacts.setModel(actualizarTabla.update());
     }
 
     private void resetearSeldas() {
         textFieldCi.setText(null);
-        textFieldAdress.setText(null);
-        textFieldApellido.setText(null);
+        textFieldAddress.setText(null);
+        textFieldSurname.setText(null);
         textFieldEmail.setText(null);
         textFieldName.setText(null);
         textFieldNumber.setText(null);

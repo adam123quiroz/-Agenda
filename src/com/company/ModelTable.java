@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.table.DefaultTableModel;
 
 public class ModelTable extends DefaultTableModel {
-    Class[] types = new Class [] {
+    private Class[] types = new Class [] {
             java.lang.String.class,
             java.lang.String.class,
             java.lang.String.class,
@@ -11,7 +11,7 @@ public class ModelTable extends DefaultTableModel {
             java.lang.String.class,
             java.lang.String.class
     };
-    boolean[] canEdit = new boolean [] {
+    private boolean[] canEdit = new boolean [] {
             true, true, true, true, true, true
     };
     ModelTable(String[] nameColumns){

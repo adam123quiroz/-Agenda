@@ -1,29 +1,29 @@
 package com.company;
 
-public class Contacto {
+public class Contact {
 
     private String id;
     private String name;
-    private String apellido;
+    private String surname;
     private String email;
-    private String adress;
+    private String address;
     private int number;
 
-    public Contacto(String id, String name, String apellido, String email, String adress, int number) {
+    public Contact(String id, String name, String surname, String email, String adress, int number) {
         this.id = id;
         this.name = name;
-        this.apellido = apellido;
+        this.surname = surname;
         this.email = email;
-        this.adress = adress;
+        this.address = adress;
         this.number = number;
     }
 
-    public Contacto( ) {
+    public Contact( ) {
         this.id = null;
         this.name = null;
-        this.apellido = null;
+        this.surname = null;
         this.email = null;
-        this.adress = null;
+        this.address = null;
         this.number = 0;
     }
 
@@ -43,12 +43,12 @@ public class Contacto {
         this.name = name;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -59,12 +59,12 @@ public class Contacto {
         this.email = email;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getNumber() {
