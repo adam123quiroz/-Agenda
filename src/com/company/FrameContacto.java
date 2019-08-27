@@ -38,7 +38,7 @@ public class FrameContacto extends JFrame{
         listaContactos = new LinkedList<>();
         dataBaseContacto = new DataBaseContacto();
 
-        listaContactos = dataBaseContacto.getAllContactos();
+        listaContactos = dataBaseContacto.getAllContacts();
         actualizarTabla = new ActualizarTabla(listaContactos);
         modelo = actualizarTabla.update();
         tableContacts.setModel(modelo);
@@ -52,7 +52,7 @@ public class FrameContacto extends JFrame{
                     textFieldAddress.getText(),
                     Integer.parseInt(textFieldNumber.getText())
             );
-            dataBaseContacto.setContanto(aux);
+            dataBaseContacto.setContanct(aux);
             actualizarContacto();
             resetearSeldas();
         });
@@ -77,7 +77,7 @@ public class FrameContacto extends JFrame{
     }//end constructor class
 
     private void actualizarContacto() {
-        listaContactos = dataBaseContacto.getAllContactos();
+        listaContactos = dataBaseContacto.getAllContacts();
         System.out.println(listaContactos.toString());
         actualizarTabla.setListContacts(listaContactos);
         tableContacts.setModel(actualizarTabla.update());

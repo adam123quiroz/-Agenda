@@ -1,5 +1,7 @@
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,25 +11,26 @@ import java.util.Objects;
 
 public class DataBaseContacto extends Database {
 
-    private PreparedStatement selectContacto = null;
-    private PreparedStatement insertContacto = null;
-    private PreparedStatement deleteContacto= null;
-    private PreparedStatement selectContactoPorCodigo = null;
+    private PreparedStatement selectContact = null;
+    private PreparedStatement insertContact = null;
+    private PreparedStatement deleteContact = null;
+    private PreparedStatement updateContact = null;
+    private PreparedStatement selectContactPerKey = null;
 
     public DataBaseContacto() {
 
         try {
-            insertContacto = getConnection().prepareStatement(
+            insertContact = getConnection().prepareStatement(
                     "INSERT INTO contacto (id, nombre, apellido, email, addres, numero) VALUES (? ,? ,? ,? ,? ,? )");
 
-            selectContacto = getConnection().prepareStatement(
+            selectContact = getConnection().prepareStatement(
                     "SELECT * FROM contacto");
 
-            deleteContacto = getConnection().prepareStatement(
+            deleteContact = getConnection().prepareStatement(
 					"DELETE FROM contacto"
 					+ "WHERE contacto.id = ?" );
 
-            selectContactoPorCodigo = getConnection().prepareStatement(
+            selectContactPerKey = getConnection().prepareStatement(
                     "SELECT * FROM `maquina` "
                             + "WHERE `COD_MAQUINA` = ?");
 
@@ -38,13 +41,13 @@ public class DataBaseContacto extends Database {
         }
     }//fin del constructor
 
-    public List<Contact> getAllContactos() {
+    public List<Contact> getAllContacts() {
 
         List <Contact>  listContactos = null;
         ResultSet resultSet = null;
         try {
 
-            resultSet = selectContacto.executeQuery();//ejecuta los queries
+            resultSet = selectContact.executeQuery();//ejecuta los queries
             listContactos = new ArrayList<>();
 
             while(resultSet.next()) {
@@ -73,33 +76,33 @@ public class DataBaseContacto extends Database {
         return listContactos;
     }
 
-    public void deleteContacto(String cod) {
+    public void deleteContact(String cod) {
 
         int actualizacion = 0;
         ResultSet resultSet = null;
         try {
 
-            deleteContacto.setString(1, cod);
-            actualizacion = deleteContacto.executeUpdate();//ejecuta los queries
+            deleteContact.setString(1, cod);
+            actualizacion = deleteContact.executeUpdate();//ejecuta los queries
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }//end try catch
     }//fin del metodo
 
-    public void setContanto(Contact contacto) {
+    public void setContanct(@NotNull Contact contact) {
 
         int actualizacion = 0;
         try {
 
-            insertContacto.setString(1, contacto.getId());
-            insertContacto.setString(2, contacto.getName());
-            insertContacto.setString(3, contacto.getSurname());
-            insertContacto.setString(4, contacto.getEmail());
-            insertContacto.setString(5, contacto.getAddress());
-            insertContacto.setInt(6, contacto.getNumber());
+            insertContact.setString(1, contact.getId());
+            insertContact.setString(2, contact.getName());
+            insertContact.setString(3, contact.getSurname());
+            insertContact.setString(4, contact.getEmail());
+            insertContact.setString(5, contact.getAddress());
+            insertContact.setInt(6, contact.getNumber());
 
-            actualizacion = insertContacto.executeUpdate();
+            actualizacion = insertContact.executeUpdate();
 
         } catch ( SQLException sqlException ) {
             sqlException.printStackTrace();
