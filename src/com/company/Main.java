@@ -7,5 +7,6 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         System.out.println("Hola logre conectarme a Github :3");
+        System.out.println("Hola logre conectarme a Github :3 x2");
     }
 }
