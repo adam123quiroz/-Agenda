@@ -1,7 +1,5 @@
 package com.company;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -90,7 +88,7 @@ public class DataBaseContacto extends Database {
         }//end try catch
     }//fin del metodo
 
-    public void setContanct(@NotNull Contact contact) {
+    public void setContanct(Contact contact) {
 
         int actualizacion = 0;
         try {
