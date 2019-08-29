@@ -46,24 +46,38 @@ public class FrameContacto extends JFrame{
         aniadirButton.addActionListener(actionEvent -> {
             try {
 
+                boolean test = false; // Se utilizara para determinar si todos los datos son correctos para asi poder subirlos a la base de datos
+                int TNumber=Integer.parseInt(textFieldNumber.getText());
+                String email = textFieldEmail.getText(); String Address = textFieldAddress.getText();String Ci =  textFieldCi.getText();
+                String Name = textFieldName.getText(); String LName = textFieldSurname.getText();
+                if (!email.contains("@") && !email.contains(".com") ) {
+                    // Se coloco aqui la excepcion para evitar que se coloquen correos electronicos invalidos
+                     test = true;
+                    JOptionPane.showMessageDialog(null, "Porfavor coloca un correo valido");
+                }
+                if(TNumber <60000000 && TNumber >79999999){
+                    // Esta es la excepcion para revisar si el numero celular es valido
+                    test = true;
+                    JOptionPane.showMessageDialog(null, "Porfavor coloca un numero valido");
+                }
+                if(!test){
+                    Contact aux = new Contact(
+                            textFieldCi.getText(),
+                            textFieldName.getText(),
+                            textFieldSurname.getText(),
+                            textFieldEmail.getText(),
+                            textFieldAddress.getText(),
+                            Integer.parseInt(textFieldNumber.getText())
 
-                int PNumber=Integer.parseInt(textFieldNumber.getText());
+                    );
 
-                Contact aux = new Contact(
-                        textFieldCi.getText(),
-                        textFieldName.getText(),
-                        textFieldSurname.getText(),
-                        textFieldEmail.getText(),
-                        textFieldAddress.getText(),
-                        PNumber
-
-                );
-
-                dataBaseContacto.setContanct(aux);
-                actualizarContacto();
-                resetearSeldas();
+                    dataBaseContacto.setContanct(aux);
+                    actualizarContacto();
+                    resetearSeldas();
+                }
 
             } catch (NumberFormatException e  ) {
+                // Esta es la excepcion para que solo se coloquen numeros y no texto en el area de numero telefonico
                 JOptionPane.showMessageDialog(null,"Solo se puede colocar numeros");
             }//fin del try catch
 

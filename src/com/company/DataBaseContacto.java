@@ -19,7 +19,7 @@ public class DataBaseContacto extends Database {
 
         try {
             insertContact = getConnection().prepareStatement(
-                    "INSERT INTO contacto (id, nombre, apellido, email, addres, numero) VALUES (? ,? ,? ,? ,? ,? )");
+                    "INSERT INTO contacto (id, nombre, apellido, email, address, numero) VALUES (? ,? ,? ,? ,? ,? )");
 
             selectContact = getConnection().prepareStatement(
                     "SELECT * FROM contacto");
@@ -54,7 +54,7 @@ public class DataBaseContacto extends Database {
                         resultSet.getString("nombre"),
                         resultSet.getString("apellido"),
                         resultSet.getString("email"),
-                        resultSet.getString("addres"),
+                        resultSet.getString("address"),
                         resultSet.getInt("numero")));
             }//fin del while
 
