@@ -44,17 +44,29 @@ public class FrameContacto extends JFrame{
         tableContacts.setModel(modelo);
 
         aniadirButton.addActionListener(actionEvent -> {
-            Contact aux = new Contact(
-                    textFieldCi.getText(),
-                    textFieldName.getText(),
-                    textFieldSurname.getText(),
-                    textFieldEmail.getText(),
-                    textFieldAddress.getText(),
-                    Integer.parseInt(textFieldNumber.getText())
-            );
-            dataBaseContacto.setContanct(aux);
-            actualizarContacto();
-            resetearSeldas();
+            try {
+
+
+                int PNumber=Integer.parseInt(textFieldNumber.getText());
+
+                Contact aux = new Contact(
+                        textFieldCi.getText(),
+                        textFieldName.getText(),
+                        textFieldSurname.getText(),
+                        textFieldEmail.getText(),
+                        textFieldAddress.getText(),
+                        PNumber
+
+                );
+
+                dataBaseContacto.setContanct(aux);
+                actualizarContacto();
+                resetearSeldas();
+
+            } catch (NumberFormatException e  ) {
+                JOptionPane.showMessageDialog(null,"Solo se puede colocar numeros");
+            }//fin del try catch
+
         });
 
         resetearButton.addActionListener(actionEvent -> resetearSeldas());
