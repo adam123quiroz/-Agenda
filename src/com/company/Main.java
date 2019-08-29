@@ -6,5 +6,6 @@ public class Main {
         FrameContacto frame = new FrameContacto();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        System.out.println("Hola logre conectarme a Github :3");
     }
 }
