@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Main2 {
     public static void main(String[] args) {
-        FrameContacto frame = new FrameContacto();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        Scanner leer = new Scanner(System.in);
+        System.out.print("Cantidad de numeros que desea generar");
+        int a = leer.nextInt();
+        fibo(a);
+	factorial(a);
+
     }
 
     public static void fibo(int a){
@@ -14,9 +17,17 @@ public class Main2 {
         int n, f = 0;
         int t1 = 1;
         int t2;
-        System.out.print("Cantidad de numeros que desea generar");
-        n = leer.nextInt();
-        for(int i)
+        for(int i = 1 ; i <= a; i++){
+            t2 = f;
+            f = t1 + f;
+            t1 = t2;
+            System.out.println(t1);
+        }
+    }
+
+    public static int factorial(int numero){
+        if (numero == 0) return 1;
+	else return numero * factorial(numero-1); 
     }
     public class numeroPrimo
 {
