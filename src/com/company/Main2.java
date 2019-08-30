@@ -29,16 +29,9 @@ public class Main2 {
         if (numero == 0) return 1;
 	else return numero * factorial(numero-1); 
     }
-    public class numeroPrimo
-{
-    public static void main(String[] ARGS)
-    {
-        Scanner obtenerNumero = new Scanner(System.in);
-        int contador,I,numero;
-        System.out.print("Ingresa un numero: ");
-        numero = obtenerNumero.nextInt();
-        contador = 0;
-        for(I = 1; I <= numero; I++)
+    public static boolean numeroPrimo(int numero){
+        int contador = 0;
+        for(int I = 1; I <= numero; I++)
         {
 
             if((numero % I) == 0)
@@ -49,14 +42,13 @@ public class Main2 {
         if(contador <= 2)
         {
 
-            System.out.println("El numero es primo");
+return true;
 
         }else{
 
-            System.out.println("El numero no es primo");
+            return false;
         }
-    }
 
-}
+    }
 
 }
