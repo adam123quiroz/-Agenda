@@ -9,7 +9,7 @@ public class Main2 {
         int a = leer.nextInt();
         fibo(a);
 	factorial(a);
-
+    numeroPrimo(a);
     }
 
     public static void fibo(int a){
