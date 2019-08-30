@@ -8,6 +8,7 @@ public class Main2 {
         System.out.print("Cantidad de numeros que desea generar");
         int a = leer.nextInt();
         fibo(a);
+	factorial(a);
 
     }
 
@@ -24,7 +25,7 @@ public class Main2 {
         }
     }
 
-    public static int factorial(int a){
+    public static int factorial(int numero){
         if (numero == 0) return 1;
 	else return numero * factorial(numero-1); 
     }
